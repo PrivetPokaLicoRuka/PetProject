@@ -1,9 +1,26 @@
+import printer.BinaryPrinter;
+
 class Main {
     public static void main(String[] args) {
-        BinaryPrinter printer = new BinaryPrinter(8);
+        BinaryPrinter printer = createPrinter(12);
 
-        System.out.println("Original size:" + printer.getSize());
+        System.out.println("Size:" + printer.getSize());
 
-        printer.print(16);
+        int value = 16;
+        doPrint(printer, value);
+        System.out.println("Size:" + printer.getSize());
+    }
+
+    private static BinaryPrinter createPrinter(int size){
+        return new BinaryPrinter(size);
+    }
+
+    private static void doPrint(BinaryPrinter printer, int value){
+        printer.print(value);
+        try {
+            printer.setSize(10);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
